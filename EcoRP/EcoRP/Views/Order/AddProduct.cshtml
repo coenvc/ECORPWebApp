@@ -1,0 +1,100 @@
+﻿@using EcoRP.Models
+@model List<Product>
+
+@{
+    ViewBag.Title = "AddProduct"; 
+   
+}
+
+
+<h2>AddProduct</h2>
+
+@using (Html.BeginForm("AddProduct", "Order","post"))
+{ 
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Serial
+        </th>
+        <th>
+            Stock
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Warranty
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Toevoegen
+        </th>
+    </tr>
+
+    @for(int i = 0; i < Model.Count; i++)
+    {
+    <tr>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem[i].Name)
+                @*@Html.HiddenFor(modelItem => modelItem[i].Name)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem[i].Serial)
+                @Html.HiddenFor(modelItem => modelItem[i].Serial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem[i].Stock)
+                @Html.HiddenFor(modelItem => modelItem[i].Stock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem[i].Brand)
+                @Html.HiddenFor(modelItem => modelItem[i].Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem[i].Description)
+                @Html.HiddenFor(modelItem => modelItem[i].Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem[i].Warranty)
+                @Html.HiddenFor(modelItem => modelItem[i].Warranty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem[i].Price)
+                @Html.HiddenFor(modelItem => modelItem[i].Price)
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => modelItem[i].Amount)
+            @Html.HiddenFor(modelItem => modelItem[i].Amount)
+        </td>
+        <td>
+                @Html.DisplayFor(modelItem => modelItem[i].IsChecked)
+                @Html.CheckBoxFor(modelItem => modelItem[i].IsChecked)
+            </td>
+            <td>
+            </td>
+        </tr>
+    }*
+
+    @*@foreach (Product product in Model)
+    {
+        @Html.CheckBox(product.Name,product.IsChecked);
+    }*@
+</table>
+
+<input type="submit" value="submit" class="btn btn-default"> 
+}
+  
+
+
+

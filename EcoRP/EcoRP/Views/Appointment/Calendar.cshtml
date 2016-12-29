@@ -1,0 +1,29 @@
+﻿@using System.Collections.Specialized
+
+@{
+    ViewBag.Title = "Calendar";
+}
+
+<h2>Calendar</h2>
+
+@section Scripts{
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        // page is now ready, initialize the calendar... 
+
+        $('#calendar').fullCalendar({
+            // put your options and callbacks here 
+            theme: true,
+            header: {
+                left: 'prev, next today',
+                center: 'title',
+                right: 'month, agendaWeek, agendaDay'
+            }
+
+        })
+
+    });
+
+</script>
+}

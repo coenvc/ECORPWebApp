@@ -1,0 +1,94 @@
+﻿@model EcoRP.Models.Employee
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 toppad">
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@Model.Name @Model.Surname</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3 "> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                        <div class=" col-md-12 col-lg-9 ">
+                            <table class="table borderless">
+                                <tbody>
+                                    <tr>
+                                        <td>Department:</td>
+                                        <td>@Model.Role</td>
+                                    </tr>
+                                    <tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td><a href="mailto:@Model.Email">@Model.Email</a></td>
+                                    </tr>
+                                <td>Phone Number</td>
+                                <td>
+                                    @Model.Telefoonnummer
+                                </td>
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+                    
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+                                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+                                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+                                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="home">
+                                    <table>
+                                        <tr>
+                                            <td>Hire date:</td>
+                                            <td>06/23/2013</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Salary</td>
+                                            <td>@Model.Salary</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Home Address</td>
+                                            <td>@Model.Address.ToString()</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="profile">...</div>
+                                <div role="tabpanel" class="tab-pane" id="messages">...</div>
+                                <div role="tabpanel" class="tab-pane" id="settings">...</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                    <span class="pull-right">
+                        <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
