@@ -1,42 +1,216 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+﻿@using EcoRP.Models
+@{ 
+
+    Employee loggedinEmployee = Session["LoggedinEmployee"] as Employee;
+}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="icon" type="image/png" href="~/Resources/images/plant-leaf-with-white-details.png" />
+    <title>@ViewBag.Title</title>
+
+    <!-- Bootstrap -->
+    <link href="~/Content/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/Content/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/Content/vendors/nprogress/nprogress.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+      <link href="~/Content/build/css/custom.css" rel="stylesheet">
+
+      <!-- Small site edites-->
+      <link href="~/Content/Site.css" rel="stylesheet">
+  </head>
+
+<body class="nav-md">
+<div class="container body">
+<div class="main_container">
+<div class="col-md-3 left_col">
+    <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+            <a href="index.html" class="site_title"><img class="title_logo" src="~/Resources/images/logo32x32.png" alt="Alternate Text"/> <span>ECORP</span></a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- menu profile quick info -->
+        <div class="profile">
+            <div class="profile_pic">
+                <img src="~/Resources/images/default_user.png" alt="..." class="img-circle profile_img">
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <div class="profile_info">
+                @if(loggedinEmployee != null){ 
+                <span>Welcome @loggedinEmployee.Name</span> 
+                }
+
+            </div>
+        </div>
+        <!-- /menu profile quick info -->
+        <br/>
+
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+                <ul class="nav side-menu">
+                    <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                        </ul>
+                    </li>
+                    <li><a><i class="fa fa-shopping-cart" aria-hidden="true"></i>Producten<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li class="">
+                                <a>Zonnepanelen<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none;">
+                                    <li class="sub_menu">
+                                        @Html.ActionLink("Toevoegen", "Add", "SolarPanel")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Overzicht", "Overview", "SolarPanel")
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a>Omvormers<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none;">
+                                    <li class="sub_menu">
+                                        @Html.ActionLink("Toevoegen", "Add", "Inverter")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Overzicht", "Overview", "Inverter")
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a>Montage materiaal<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none;">
+                                    <li class="sub_menu">
+                                        @Html.ActionLink("Toevoegen", "Add", "MountingMaterial")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Overzicht", "Overview", "MountingMaterial")
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
+            </div>
+
+
+        </div>
+        <!-- /sidebar menu -->
+
+        <!-- /menu footer buttons -->
+        <div class="sidebar-footer hidden-small">
+            <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Logout">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+            </a>
+        </div>
+        <!-- /menu footer buttons -->
+    </div>
+</div>
+
+<!-- top navigation -->
+<div class="top_nav">
+    <div class="nav_menu">
+        <nav>
+            <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <img src="~/Resources/images/default_user.png" alt="">@loggedinEmployee.Name
+                        <span class=" fa fa-angle-down"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                        <li>@Html.ActionLink("Profile","View","Profile")</li>
+                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- /top navigation -->
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>@ViewBag.Title</h3>
+            </div>
+
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="clearfix"></div>
+
+                    <div class="x_content">
+                        @*View Content Goes here*@
+                        @RenderBody()
+                        @*View Content Ends here*@
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+</div>
+<!-- /page content -->
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+<!-- footer content -->
+<footer>
+    <div class="pull-right">
+        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+    </div>
+    <div class="clearfix"></div>
+</footer>
+<!-- /footer content -->
+</div>
+
+<!-- jQuery -->
+<script src="~/Content/vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="~/Content/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="~/Content/vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="~/Content/vendors/nprogress/nprogress.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="~/Content/build/js/custom.js"></script>
+
+@*More custom scripts*@
+    <script src="~/Content/custom.js"></script>
+
 </body>
+
 </html>
