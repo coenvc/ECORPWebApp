@@ -54,6 +54,9 @@ C:\Users\coenv\Documents\GitHub\ECORPWebApp\EcoRP\EcoRP\bin\Newtonsoft.Json.xml
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\EcoRP\EcoRP\bin\System.Net.Http.Formatting.xml
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\EcoRP\EcoRP\bin\System.Web.Http.xml
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\EcoRP\EcoRP\bin\System.Web.Http.WebHost.xml
-C:\Users\coenv\Documents\GitHub\ECORPWebApp\EcoRP\EcoRP\obj\Debug\EcoRP.csprojResolveAssemblyReference.cache
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\EcoRP\EcoRP\obj\Debug\EcoRP.dll
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\EcoRP\EcoRP\obj\Debug\EcoRP.pdb
+C:\Users\coenv\Documents\GitHub\ECORPWebApp\EcoRP\EcoRP\obj\Debug\EcoRP.csprojResolveAssemblyReference.cache
+C:\Users\coenv\Documents\GitHub\ECORPWebApp\EcoRP\EcoRP\bin\System.Web.Cors.dll
+C:\Users\coenv\Documents\GitHub\ECORPWebApp\EcoRP\EcoRP\bin\System.Web.Http.Cors.dll
+C:\Users\coenv\Documents\GitHub\ECORPWebApp\EcoRP\EcoRP\bin\System.Web.Http.Cors.xml

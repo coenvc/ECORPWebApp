@@ -92,7 +92,7 @@ namespace EcoRP.Repositories.MSSQLRepository
 
         public Appointment GetById(int id)
         {
-            string query = "select * from appoint where id = @id";
+            string query = "select KlantId,MedewerkerId,Datum,Id from Afspraak where id = @id";
             if (OpenConnection())
             {
                 using (SqlCommand command = new SqlCommand(query,Connection))
@@ -102,10 +102,15 @@ namespace EcoRP.Repositories.MSSQLRepository
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            Appointment appointment = CreateFromReader(reader);
-                            return appointment;
+                            while (reader.Read())
+                            {
+                                Appointment appointment = CreateFromReader(reader);
+                                return appointment;
+                            }
                         }
-                    }
+                         
+                     
+                    } 
                     catch (SqlException exception)
                     {
 
@@ -155,6 +160,39 @@ namespace EcoRP.Repositories.MSSQLRepository
         {
             List<Appointment> appointments = new List<Appointment>();
             string query = "select * from Afspraak where MedewerkerId = @id";
+            if (OpenConnection())
+            {
+                try
+                {
+                    using (SqlCommand command = new SqlCommand(query, Connection))
+                    {
+                        command.Parameters.AddWithValue("@id", id);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                appointments.Add(CreateFromReader(reader));
+                            }
+                        }
+                    }
+
+                }
+                catch (SqlException exception)
+                {
+
+                }
+                finally
+                {
+                    CloseConnection();
+                }
+            }
+            return appointments;
+        }
+
+        public List<Appointment> GetByCustomerId(int id)
+        {
+            List<Appointment> appointments = new List<Appointment>();
+            string query = "select * from Afspraak where KlantId = @id";
             if (OpenConnection())
             {
                 try

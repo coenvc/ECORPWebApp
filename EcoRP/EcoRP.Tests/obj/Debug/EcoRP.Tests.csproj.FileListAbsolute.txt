@@ -15,7 +15,6 @@ C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\EcoRP.Te
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\EcoRP.Tests.dll
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\EcoRP.Tests.pdb
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\EcoRP.dll
-C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\Microsoft.Web.Infrastructure.dll
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\Newtonsoft.Json.dll
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\System.Web.Helpers.dll
@@ -29,7 +28,6 @@ C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\System.W
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\System.Net.Http.Formatting.dll
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\System.Web.Http.WebHost.dll
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\EcoRP.pdb
-C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\Newtonsoft.Json.xml
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\System.Web.Helpers.xml
 C:\Users\coenv\Documents\GitHub\ECORPWebApp\ECORP\EcoRP.Tests\bin\Debug\System.Web.Mvc.xml

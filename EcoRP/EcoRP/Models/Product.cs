@@ -28,7 +28,7 @@ namespace EcoRP.Models
         [DataType(DataType.Currency)]
         public decimal Price { get; set; } 
         public bool IsChecked { get; set; } 
-        public int Amount { get; set; }
+        public int Amount { get; set; } 
 
         /// <summary>
         /// Use to insert product into the Repository

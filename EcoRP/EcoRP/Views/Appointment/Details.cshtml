@@ -3,24 +3,63 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>Appointment</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-    </dl>
+<div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <div class="tile-stats">
+        <div class="icon"><i class="fa fa-check-square-o"></i></div>
+        <div class="duration count"></div>
+        <h3>Geschatte reistijd</h3>
+    </div>
 </div>
+<div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <div class="tile-stats">
+        <div class="icon"><i class="fa fa-check-square-o"></i></div>
+        <div class="distance count"></div>
+        <h3>Vanaf huidige locatie</h3>
+    </div>
+</div>
+<div class="col-md-2 control-label">Klant naam:</div>
+<div class="col-md-10">
+    @Html.ActionLink(Model.Customer.ToString(), "Details", "Customer", new {Id = Model.Id}, null)
+</div>
+<div class="col-md-2 control-label">Verkoper naam:</div>
+<div class="col-md-10">
+    @Html.ActionLink(Model.Salesman.ToString(), "Details", "Employee", new {Id = Model.Id}, null)
+</div>
+<div class="hidden" id="apiCall">
+    http://localhost:17391/api/calendar/Getbyid/@Model.Id.ToString()
+</div>
+
+
+    <style type="text/css">
+        #map {
+            width:100%;
+            height: 400px;
+            margin-top: 10px;
+        }
+    </style>
+
+    <div class="hidden">
+        <h1>Calculate your route</h1>
+        <form id="calculate-route" name="calculate-route" action="#" method="get">
+            <label for="from">From:</label>
+            <input type="text" id="from" name="from" required="required" placeholder="An address" size="30" />
+            <a id="from-link" href="#">Get my position</a>
+            <br />
+
+            <label for="to">To:</label>
+            <input type="text" id="to" name="to" required="required" placeholder="Another address" size="30" />
+            <a id="to-link" href="#">Get my position</a>
+            <br />
+
+            <input type="submit" />
+            <input type="reset" />
+        </form>
+    </div>
+<div id="map"></div>
+<p id="error"></p>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+

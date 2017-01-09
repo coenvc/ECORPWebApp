@@ -11,6 +11,8 @@ namespace EcoRP.Controllers
     public class CustomerController : Controller
     {
         private CustomerLogic Customers = new CustomerLogic();
+        private OrderLogic Orders = new OrderLogic();
+        private AppointmentLogic Appointments = new AppointmentLogic();
         [HttpGet]
         public ActionResult Index()
         {
@@ -20,7 +22,8 @@ namespace EcoRP.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            return View(Customers.GetById(id));
+            CustomerProfileViewModel Customer = new CustomerProfileViewModel(Customers.GetById(id),Appointments.GetByCustomerId(id), Orders.GetByCustomerId(id));
+            return View(Customer);
         }
 
         [HttpGet]
@@ -54,27 +57,20 @@ namespace EcoRP.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit (int id)
         {
-
             return View(Customers.GetById(id));
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(FormCollection collection)
+        public ActionResult Edit(Customer customer)
         {
-            Customer customer = new Customer();
-            customer.Name = collection["Name"];
-            customer.Surname = collection["Surname"];
-            customer.Email = collection["Email"];
-            customer.Telefoonnummer = collection["Telefoonnummer"];
-            customer.Roof = new Roof(Convert.ToInt32(collection["Roof.Width"]), Convert.ToInt32(collection["Roof.Height"]), Convert.ToInt32(collection["Roof.Angle"]));
-            customer.Address = new Address(collection["Address.Streetname"], collection["Address.City"], Convert.ToInt32(collection["Address.Housenumber"]), collection["Address.ZipCode"]);
-            customer.Id = Convert.ToInt32(collection["Id"]);
-            customer.Roof.Id = Convert.ToInt32(collection["Roof.Id"]);
-            customer.Roof.Id = Convert.ToInt32(collection["Address.Id"]);
-            return View("Details", Customers.GetById(customer.Id));
+            int id = customer.Id;
+            Customers.Update(customer.Id, customer);
+            CustomerProfileViewModel ProfileCustomer = new CustomerProfileViewModel(customer,
+                Appointments.GetByCustomerId(id), Orders.GetByCustomerId(id));
+            return View("Details", ProfileCustomer);
         }
 
         [HttpGet]

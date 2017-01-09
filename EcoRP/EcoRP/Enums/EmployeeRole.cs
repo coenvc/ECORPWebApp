@@ -2,7 +2,8 @@
 {
     public enum EmployeeRole
     {
-        Salesman = 1, 
-
+        Magazijnbeheerder = 1, 
+        Salesman = 2, 
+        Admin = 3
     }
 }

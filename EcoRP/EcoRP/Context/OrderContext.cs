@@ -7,10 +7,10 @@ using EcoRP.Models;
 
 namespace EcoRP.Context
 {
-    public class OrderContext:IRepository<Order>
+    public class OrderContext:IORderRepository
     {
-        private IRepository<Order> Context; 
-        public OrderContext(IRepository<Order> context)
+        private IORderRepository Context; 
+        public OrderContext(IORderRepository context)
         {
             Context = context;
         }
@@ -39,6 +39,16 @@ namespace EcoRP.Context
         {
             List<Order> orders = Context.GetAll();
             return orders;
+        }
+
+        public List<Order> GetByEmployeeId(int id)
+        {
+            return Context.GetByEmployeeId(id);
+        }
+
+        public List<Order> GetByCustomerId(int id)
+        {
+            return Context.GetByCustomerId(id);
         }
     }
 }

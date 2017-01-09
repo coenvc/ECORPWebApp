@@ -83,12 +83,20 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -162,6 +170,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Context\AppointmentContext.cs" />
+    <Compile Include="Context\InverterContext.cs" />
+    <Compile Include="Context\MountingMaterialContext.cs" />
+    <Compile Include="Context\SolarPanelContext.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
@@ -175,24 +186,31 @@
     <Compile Include="Enums\CelType.cs" />
     <Compile Include="Enums\EmployeeRole.cs" />
     <Compile Include="Enums\ProductType.cs" />
+    <Compile Include="Exceptions\AccountException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\ICruddable.cs" />
-    <Compile Include="Interfaces\ICustomerRepository.cs" />
+    <Compile Include="IRepository\ICustomerRepository.cs" />
+    <Compile Include="IRepository\IMountingMaterialRepository.cs" />
     <Compile Include="Interfaces\ISellable.cs" />
     <Compile Include="IRepository\IAppointmentRepository.cs" />
     <Compile Include="IRepository\IAuthenticationRepository.cs" />
     <Compile Include="IRepository\IEmployeeRepository.cs" />
+    <Compile Include="IRepository\IInverterRepository.cs" />
+    <Compile Include="IRepository\IOrderRepository.cs" />
     <Compile Include="IRepository\IProductRepository.cs" />
     <Compile Include="IRepository\IRepository.cs" />
     <Compile Include="IRepository\ISolarpanelRepository.cs" />
     <Compile Include="Logic\AppointmentLogic.cs" />
     <Compile Include="Logic\CustomerLogic.cs" />
     <Compile Include="Logic\EmployeeLogic.cs" />
+    <Compile Include="Logic\InverterLogic.cs" />
     <Compile Include="Logic\OrderLogic.cs" />
     <Compile Include="Logic\ProductLogic.cs" />
+    <Compile Include="Logic\SolarPanelLogic.cs" />
     <Compile Include="Models\CustomerEmployeeViewModel.cs" />
+    <Compile Include="Models\CustomerProfileViewModel.cs" />
     <Compile Include="Models\Database.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Repositories\LocalRepository\LocalAppointmentRepository.cs" />
@@ -206,12 +224,10 @@
     <Compile Include="Models\Inverter.cs" />
     <Compile Include="Models\MountingMaterial.cs" />
     <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\ProfileController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Models\Roof.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\SolarPanel.cs" />
-    <Compile Include="Models\Supplier.cs" />
-    <Compile Include="Models\Warehouse.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
@@ -225,6 +241,10 @@
     <Compile Include="Repositories\MSSQLRepository\MSSQLAppointmentRepository.cs" />
     <Compile Include="Repositories\MSSQLRepository\MSSQLCustomerRepository.cs" />
     <Compile Include="Repositories\MSSQLRepository\MSSQLEmployeeRepository.cs" />
+    <Compile Include="Repositories\MSSQLRepository\MSSQLInverterRepository.cs" />
+    <Compile Include="Logic\MountingMaterialLogic.cs" />
+    <Compile Include="Repositories\MSSQLRepository\MSSQLMountingMaterialRepository.cs" />
+    <Compile Include="Repositories\MSSQLRepository\MSSQLOrderRepository.cs" />
     <Compile Include="Repositories\MSSQLRepository\MSSQLSolarPanelRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +258,8 @@
     <Content Include="Content\build\js\notActive.js" />
     <Content Include="Content\build\js\product.js" />
     <Content Include="Content\custom.js" />
+    <Content Include="Content\easterEgg.js" />
+    <Content Include="Content\mapsApiCommunication.js" />
     <Content Include="Content\vendors\animate.css\animate.css" />
     <Content Include="Content\vendors\animate.css\animate.min.css" />
     <Content Include="Content\vendors\animate.css\gulpfile.js" />
@@ -3154,6 +3176,9 @@
     <Content Include="Content\vendors\jsPDF-1.2.60\jsPDF-1.2.60\test\012_multiplelines.pdf" />
     <Content Include="Content\vendors\jsPDF-1.2.60\jsPDF-1.2.60\test\013_sillysvgrenderer.pdf" />
     <Content Include="Content\vendors\jsPDF-1.2.60\jsPDF-1.2.60\test\015_splittext.pdf" />
+    <None Include="Properties\PublishProfiles\ecrop2.pubxml" />
+    <None Include="Properties\PublishProfiles\ftp.pubxml" />
+    <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -3166,6 +3191,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Static\Jacques.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -3177,7 +3203,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -3190,7 +3215,6 @@
     <Content Include="Views\Product\Update.cshtml" />
     <Content Include="Views\SolarPanel\Add.cshtml" />
     <Content Include="Views\SolarPanel\Details.cshtml" />
-    <Content Include="Views\SolarPanel\Delete.cshtml" />
     <Content Include="Views\SolarPanel\Overview.cshtml" />
     <Content Include="Views\Inverter\Add.cshtml" />
     <Content Include="Views\Inverter\Edit.cshtml" />
@@ -3211,7 +3235,6 @@
     <Content Include="Views\Order\AddProduct.cshtml" />
     <Content Include="Views\Profile\View.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
-    <Content Include="Views\Customer\Details.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Employee\Details.cshtml" />
     <Content Include="Views\SolarPanel\Edit.cshtml" />
@@ -3223,6 +3246,9 @@
     <Content Include="Views\Customer\Create.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Appointment\Create.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

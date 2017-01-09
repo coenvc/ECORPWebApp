@@ -37,7 +37,7 @@ namespace EcoRP.Controllers
             }
             catch (Exception exception)
             {
-                return RedirectToAction("Login");
+                return View("Login");
             }
         }
         } 

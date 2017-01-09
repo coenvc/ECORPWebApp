@@ -39,27 +39,41 @@ namespace EcoRP.Controllers
         [HttpGet]
         public ActionResult MyAppointments()
         {   
-            Employee loggedInEmployee = Session["loggedInEmployee"] as Employee;  
-            return View(_appointment.GetByEmployeeId(loggedInEmployee.Id));
-        }
+            Employee loggedInEmployee = Session["loggedInEmployee"] as Employee;
+                //TODO: Redirect if loggedInEmployee is null
+                return View(_appointment.GetPlannedAppointmentsByEmployee(loggedInEmployee.Id));
+        } 
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View(_appointment.GetById(id)); 
+            return View(_appointment.GetById(id));
         }
 
-        [HttpGet]
-        public ActionResult Edit(Appointment appointment)
+        //TODO: Use this for equally named actions: [ActionName("Name of action")]
+        [HttpPost] 
+        [ActionName("Edit")]
+        public ActionResult EditPost(int id)
         {
-            _appointment.Update(appointment.Id, appointment);
-            return View();
+            _appointment.Update(id, _appointment.GetById(id));
+            return View("Details",_appointment.GetById(id));
         }
-
         [HttpGet]
         public ActionResult Details(int id)
         {
             return View(_appointment.GetById(id)); 
+        }
+        
+        public ActionResult Test()
+        {
+            try
+            {
+                return View("Details", _appointment.GetById(500));
+            }
+            catch (Exception exception)
+            {
+                return View("Error", exception);
+            }
         }
 
     }

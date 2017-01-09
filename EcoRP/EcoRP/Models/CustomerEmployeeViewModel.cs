@@ -8,6 +8,7 @@ namespace EcoRP.Models
     public class CustomerEmployeeViewModel
     {
         public Customer customer { get; set; } 
-        public List<Employee> SalesMen { get; set; }
+        public List<Employee> SalesMan { get; set; } 
+
     }
 }

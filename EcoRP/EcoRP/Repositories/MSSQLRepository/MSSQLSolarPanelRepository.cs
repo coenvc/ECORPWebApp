@@ -40,19 +40,20 @@ namespace EcoRP.Repositories.MSSQLRepository
                 {
                     SqlConnection Connection = this.Connection;
                     SqlCommand insertSolarPanel = Connection.CreateCommand();
-                    insertSolarPanel.CommandText = "EXECUTE updateSolarPanel @Naam,@Merk,@Omschrijving,@Garantie,@Vermogen,@Celtype,@lengte,@Breedte,@Hoogte,@Serienummer,@Prijs,@Kleur";
+                    insertSolarPanel.CommandText = "EXECUTE insertSolarPanel @Naam,@Merk,@Omschrijving,@Garantie,@Vermogen,@Celtype,@lengte,@Breedte,@Hoogte,@Serienummer,@Prijs,@Kleur,@Voorraad";
                     insertSolarPanel.Parameters.AddWithValue("@Naam", entity.Name);
                     insertSolarPanel.Parameters.AddWithValue("@Merk", entity.Brand);
                     insertSolarPanel.Parameters.AddWithValue("@Omschrijving", entity.Description);
                     insertSolarPanel.Parameters.AddWithValue("@Garantie", entity.Warranty);
                     insertSolarPanel.Parameters.AddWithValue("@Vermogen", entity.Power);
-                    insertSolarPanel.Parameters.AddWithValue("@Celtype", entity.Celtype);
+                    insertSolarPanel.Parameters.AddWithValue("@Celtype", entity.Celtype.ToString());
                     insertSolarPanel.Parameters.AddWithValue("@lengte", entity.Length);
                     insertSolarPanel.Parameters.AddWithValue("@Breedte", entity.Width);
                     insertSolarPanel.Parameters.AddWithValue("@Hoogte", entity.Height);
                     insertSolarPanel.Parameters.AddWithValue("@Serienummer", entity.Serial);
                     insertSolarPanel.Parameters.AddWithValue("@Prijs", entity.Price);
                     insertSolarPanel.Parameters.AddWithValue("@Kleur", entity.Color);
+                    insertSolarPanel.Parameters.AddWithValue("@Voorraad", entity.Stock);
    
                     insertSolarPanel.ExecuteNonQuery();
 
@@ -77,13 +78,13 @@ namespace EcoRP.Repositories.MSSQLRepository
                 {
                     SqlConnection Connection = this.Connection;
                     SqlCommand insertSolarPanel = Connection.CreateCommand();
-                    insertSolarPanel.CommandText = "EXECUTE insertSolarpanel @Naam,@Merk,@Omschrijving,@Garantie,@Vermogen,@Celtype,@lengte,@Breedte,@Hoogte,@Serienummer,@Prijs,@Kleur,@ProductId";
+                    insertSolarPanel.CommandText = "EXECUTE insertSolarpanel @Naam,@Merk,@Omschrijving,@Garantie,@Vermogen,@Celtype,@lengte,@Breedte,@Hoogte,@Serienummer,@Prijs,@Kleur,@ProductId,@Voorraad";
                     insertSolarPanel.Parameters.AddWithValue("@Naam", entity.Name);
                     insertSolarPanel.Parameters.AddWithValue("@Merk", entity.Brand);
                     insertSolarPanel.Parameters.AddWithValue("@Omschrijving", entity.Description);
                     insertSolarPanel.Parameters.AddWithValue("@Garantie", entity.Warranty);
                     insertSolarPanel.Parameters.AddWithValue("@Vermogen", entity.Power);
-                    insertSolarPanel.Parameters.AddWithValue("@Celtype", entity.Celtype);
+                    insertSolarPanel.Parameters.AddWithValue("@Celtype", entity.Celtype.ToString());
                     insertSolarPanel.Parameters.AddWithValue("@lengte", entity.Length);
                     insertSolarPanel.Parameters.AddWithValue("@Breedte", entity.Width);
                     insertSolarPanel.Parameters.AddWithValue("@Hoogte", entity.Height);
@@ -91,6 +92,7 @@ namespace EcoRP.Repositories.MSSQLRepository
                     insertSolarPanel.Parameters.AddWithValue("@Prijs", entity.Price);
                     insertSolarPanel.Parameters.AddWithValue("@Kleur", entity.Color);
                     insertSolarPanel.Parameters.AddWithValue("@ProductId", entity.Id);
+                    insertSolarPanel.Parameters.AddWithValue("@Voorraad", entity.Stock);
                     insertSolarPanel.ExecuteNonQuery();
 
                 }
@@ -112,11 +114,10 @@ namespace EcoRP.Repositories.MSSQLRepository
                 try
                 {
                     SqlConnection Connection = this.Connection;
-                    SqlCommand insertSolarPanel = Connection.CreateCommand();
-                    insertSolarPanel.CommandText = "EXECUTE deleteProduct @Id";
-                    insertSolarPanel.Parameters.AddWithValue("@id",id);
-                    insertSolarPanel.ExecuteNonQuery();
-
+                    SqlCommand command = Connection.CreateCommand();
+                    command.CommandText = "EXECUTE deleteProduct @Id";
+                    command.Parameters.AddWithValue("@id",id);
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException exception)
                 {

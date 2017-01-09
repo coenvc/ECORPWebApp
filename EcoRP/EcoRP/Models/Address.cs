@@ -34,5 +34,10 @@ namespace EcoRP.Models
         {
             
         }
+
+        public override string ToString()
+        {
+            return $"{Streetname} {Housenumber}";
+        }
     }
 }

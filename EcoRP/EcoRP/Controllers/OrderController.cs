@@ -10,14 +10,15 @@ using EcoRP.Context;
 using EcoRP.Logic;
 using EcoRP.Models;
 using EcoRP.Repositories.LocalRepository;
+using EcoRP.Repositories.MSSQLRepository;
 
 namespace EcoRP.Controllers
 {
     public class OrderController : Controller
     {
         private ProductLogic ProductLogic = new ProductLogic();
-        private OrderContext _orderContext = new OrderContext(new LocalOrderRepository());
-        private ProductContext _productContext = new ProductContext(new LocalProductRepository());
+        private OrderContext _orderContext = new OrderContext(new MSSQLOrderRepository());
+
      
         [HttpGet]
         public ActionResult Add(OrderViewModel order)
@@ -40,7 +41,7 @@ namespace EcoRP.Controllers
         [HttpGet]
         public ActionResult AddProduct(OrderViewModel order)
         {
-            List<Product> allProducts = _productContext.GetAll().Cast<Product>().ToList(); 
+            List<Product> allProducts = ProductLogic.GetAll(); 
             return View(allProducts);
         }
 
@@ -73,7 +74,19 @@ namespace EcoRP.Controllers
         public ActionResult AddToOrder(Order order)
         {  
             return View("Add", order);
-        } 
+        }
 
+        [HttpGet]
+        public ActionResult Overview(Order order)
+        {
+            return View(_orderContext.GetAll());
+        }
+
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            return View(_orderContext.GetById(id)); 
+
+        }
     }
 }

@@ -1,7 +1,9 @@
-﻿@model EcoRP.Models.Employee
+﻿@using EcoRP.Models
+@model EcoRP.Models.Employee
 
 @{
     ViewBag.Title = "Edit";
+    Employee loggedIn = Session["LoggedInEmployee"] as Employee;
 }
 
 <h2>Edit</h2>
@@ -104,14 +106,15 @@
                 @Html.EnumDropDownListFor(x => x.Role, "Select My Type", new { @class = "form-control" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Account.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.CheckBoxFor(model => model.Account.IsActive)
+        @if (loggedIn.Role == EcoRP.Enums.EmployeeRole.Admin)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Account.IsActive, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.Account.IsActive)
+                </div>
             </div>
-        </div>
-
+        }
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

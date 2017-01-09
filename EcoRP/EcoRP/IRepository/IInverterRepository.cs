@@ -7,7 +7,7 @@ using EcoRP.Models;
 
 namespace EcoRP.IRepository
 {
-    interface IInverterRepository:IRepository<Inverter>
+    public interface IInverterRepository:IRepository<Inverter>
     {
     }
 }

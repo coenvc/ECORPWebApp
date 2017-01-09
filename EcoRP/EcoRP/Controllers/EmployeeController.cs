@@ -48,5 +48,10 @@ namespace EcoRP.Controllers
             Logic.Update(employee.Id, employee);
             return View("Details",Logic.GetById(employee.Id)); 
         }
+
+        public ActionResult Jacques()
+        {
+            return Redirect("../Views/Static/Jacques.html");
+        }
     }
 }

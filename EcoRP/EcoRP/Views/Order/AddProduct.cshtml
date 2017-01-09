@@ -48,6 +48,7 @@
             <td>
                 @Html.DisplayFor(modelItem => modelItem[i].Name)
                 @*@Html.HiddenFor(modelItem => modelItem[i].Name)*@
+                @Html.HiddenFor(modelItem => modelItem[i].Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => modelItem[i].Serial)

@@ -43,5 +43,10 @@ namespace EcoRP.Context
         {
             return Context.GetByEmployeeId(id);
         }
+
+        public List<Appointment> GetByCustomerId(int id)
+        {
+            return Context.GetByCustomerId(id);
+        }
     }
 }

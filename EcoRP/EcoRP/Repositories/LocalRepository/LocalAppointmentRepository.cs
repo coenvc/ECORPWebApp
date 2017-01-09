@@ -39,5 +39,10 @@ namespace EcoRP.Repositories.LocalRepository
         {
             return Crud.GetAll().Where(x => x.Salesman.Id == id).ToList();
         }
+
+        public List<Appointment> GetByCustomerId(int id)
+        {
+            return Crud.GetAll().Where(x => x.Customer.Id == id).ToList();
+        }
     }
 }

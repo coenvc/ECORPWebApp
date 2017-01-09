@@ -42,5 +42,10 @@ namespace EcoRP.Models
             Customer = customer;
             Salesman = salesman;
         }
+
+        public override string ToString()
+        {
+            return $"Afspraak vond plaats op {Date} met verkoper{Salesman.Name}"; 
+        }
     }
 }

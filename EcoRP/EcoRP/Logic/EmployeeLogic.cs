@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using EcoRP.Context;
+using EcoRP.Exceptions;
 using EcoRP.IRepository;
 using EcoRP.Models;
 using EcoRP.Repositories.LocalRepository;
@@ -52,7 +53,7 @@ namespace EcoRP.Logic
             }
             else
             {
-                throw new Exception();
+                throw new AccountException();
             }
         } 
 

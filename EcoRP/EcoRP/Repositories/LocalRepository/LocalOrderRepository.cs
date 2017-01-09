@@ -17,7 +17,7 @@ namespace EcoRP.Repositories.LocalRepository
         {
             List<Product> Products = new List<Product>();
             SolarPanel dummySolarpanel1 = new SolarPanel(270, Enums.CelType.Poly, "Zwart", 100, 20, 10, "Solarmax 270", 001, 10, "Solarmax", "Dit is een mooi zonnepaneel", 20,250);
-            Inverter dummyInverter1 = new Inverter("KLNE 3600", 003, 10, "KLNE", "Dit is een goede omvormer", 10, 3600, 10, "Oranje", true,1000);
+            Inverter dummyInverter1 = new Inverter("KLNE 3600", 003, 10, "KLNE", "Dit is een goede omvormer", 10, 3600, 10, "Oranje", true,1000,100,200);
             MountingMaterial dummyMountingMaterial1 = new MountingMaterial("Aluminium Frame", 004, 100, "Custom made", "Dit is montagemateriaal", 10, "Aluminium",10);
             Products.Add(dummySolarpanel1);
             Products.Add(dummyInverter1);

@@ -37,7 +37,7 @@ namespace EcoRP.Repositories.MSSQLRepository
                 {
                     SqlConnection Connection = this.Connection;
                     SqlCommand command = Connection.CreateCommand();
-                    command.CommandText = "EXECUTE insertInverter @Naam,@Merk,@Omschrijving,@Garantie,@Vermogen,@Celtype,@lengte,@Breedte,@Hoogte,@Serienummer,@Prijs,@Kleur";
+                    command.CommandText = "EXECUTE insertInverter @Naam,@Merk,@Omschrijving,@Garantie,@Vermogen,@Monitoring,@lengte,@Breedte,@Hoogte,@Serienummer,@Prijs,@Kleur";
                     command.Parameters.AddWithValue("@Naam", entity.Name);
                     command.Parameters.AddWithValue("@Merk", entity.Brand);
                     command.Parameters.AddWithValue("@Omschrijving", entity.Description);
@@ -67,22 +67,127 @@ namespace EcoRP.Repositories.MSSQLRepository
 
         public void Update(int id, Inverter entity)
         {
-            throw new NotImplementedException();
+            if (OpenConnection())
+            {
+                try
+                {
+                    SqlConnection Connection = this.Connection;
+                    SqlCommand command = Connection.CreateCommand();
+                    command.CommandText = "EXECUTE updateInverter @Naam,@Merk,@Omschrijving,@Garantie,@Vermogen,@Monitoring,@lengte,@Breedte,@Hoogte,@Serienummer,@Prijs,@Kleur,@ProductId";
+                    command.Parameters.AddWithValue("@Naam", entity.Name);
+                    command.Parameters.AddWithValue("@Merk", entity.Brand);
+                    command.Parameters.AddWithValue("@Omschrijving", entity.Description);
+                    command.Parameters.AddWithValue("@Garantie", entity.Warranty);
+                    command.Parameters.AddWithValue("@Vermogen", entity.Power);
+                    command.Parameters.AddWithValue("@Monitoring", Convert.ToInt32(entity.Monitoring));
+                    command.Parameters.AddWithValue("@lengte", entity.Length);
+                    command.Parameters.AddWithValue("@Breedte", entity.Width);
+                    command.Parameters.AddWithValue("@Hoogte", entity.Height);
+                    command.Parameters.AddWithValue("@Serienummer", entity.Serial);
+                    command.Parameters.AddWithValue("@Prijs", entity.Price);
+                    command.Parameters.AddWithValue("@Kleur", entity.Color);
+                    command.Parameters.AddWithValue("@ProductId", entity.Id);
+
+                    command.ExecuteNonQuery();
+
+                }
+                catch (SqlException exception)
+                {
+
+                }
+                finally
+                {
+                    CloseConnection();
+                }
+            }
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            if (OpenConnection())
+            {
+                try
+                {
+                    SqlConnection Connection = this.Connection;
+                    SqlCommand command = Connection.CreateCommand();
+                    command.CommandText = "EXECUTE deleteProduct @Id";
+                    command.Parameters.AddWithValue("@id", id);
+                    command.ExecuteNonQuery();
+
+                }
+                catch (SqlException exception)
+                {
+
+                }
+                finally
+                {
+                    CloseConnection();
+                }
+            }
         }
 
         public Inverter GetById(int id)
         {
-            throw new NotImplementedException();
+            string query = "select p.Id,Serienummer,Naam,Prijs,Merk,Omschrijving,Garantie,Voorraad,kleur,lengte,breedte,hoogte,monitoring,vermogen from Product p inner join ProductEigenschappen pe on pe.Id = p.EigenschappenID where TypeID = 2 and p.id = @id";
+            if (OpenConnection())
+            {
+                try
+                {
+                    using (SqlCommand command = new SqlCommand(query, Connection))
+                    {
+                        command.Parameters.AddWithValue("@id", id);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Inverter inverter = CreateFromReader(reader);
+                                return inverter;
+                            }
+                        }
+                    }
+                }
+                catch (Exception exception)
+                {
+
+                }
+                finally
+                {
+                    CloseConnection(); 
+                }
+            }
+            throw new Exception();
         }
 
         public List<Inverter> GetAll()
         {
-            throw new NotImplementedException();
+            List<Inverter> Inverters = new List<Inverter>();
+            string query ="select p.Id,Serienummer,Naam,Prijs,Merk,Omschrijving,Garantie,Voorraad,kleur,lengte,breedte,hoogte,monitoring,vermogen from Product p inner join ProductEigenschappen pe on pe.Id = p.EigenschappenID where TypeID = 2";
+            if (OpenConnection())
+            {
+                try
+                {
+                    using (SqlCommand command = new SqlCommand(query, Connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Inverters.Add(CreateFromReader(reader));
+                            }
+                            return Inverters;
+                        }
+                    }
+                }
+                catch (SqlException exception)
+                {
+                    throw exception;
+                }
+                finally
+                {
+                    CloseConnection();
+                }
+            }
+            throw new Exception();
         }
     }
 }

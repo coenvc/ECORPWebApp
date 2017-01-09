@@ -12,7 +12,7 @@ namespace EcoRP.Models
         public bool IsActive { get; set; }
         public int Id { get; private set; }
 
-        public Account(string username, string password, bool isActive, int employeeId, int id)
+        public Account(string username, string password, bool isActive, int id)
         {
             Username = username;
             Password = password;
@@ -20,7 +20,7 @@ namespace EcoRP.Models
             Id = id;
         }
 
-        public Account(string username, string password, bool isActive, int employeeId)
+        public Account(string username, string password, bool isActive)
         {
             Username = username;
             Password = password;

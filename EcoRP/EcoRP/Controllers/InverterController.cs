@@ -7,23 +7,17 @@ using EcoRP.Interfaces;
 using EcoRP.Context;
 using EcoRP.Models;
 using EcoRP.Repositories.LocalRepository;
+using EcoRP.Repositories.MSSQLRepository;
 
 namespace EcoRP.Controllers
 {
     public class InverterController : Controller
     {
-        private ProductContext _productContext = new ProductContext(new LocalProductRepository());
+        private MSSQLInverterRepository InverterLogic = new MSSQLInverterRepository();
         // GET: MountingMaterial
         public ActionResult Overview()
         {
-            List<Inverter> Inverters = new List<Inverter>();
-            foreach (ISellable inverter in _productContext.GetAll())
-            {
-                if(inverter is Inverter) {  
-                    Inverters.Add(inverter as Inverter);
-                }
-            }
-            return View(Inverters);
+            return View(InverterLogic.GetAll());
         }
 
         [HttpGet]
@@ -35,21 +29,35 @@ namespace EcoRP.Controllers
         [HttpPost]
         public ActionResult Add(Inverter Inverter)
         {
-            _productContext.Insert(Inverter);  
+            InverterLogic.Insert(Inverter);  
               
             return View();
         }
-
+        [HttpGet]
         public ActionResult Details(int id)
         {
-            Inverter Inverter = _productContext.GetById(id) as Inverter;
+            Inverter Inverter = InverterLogic.GetById(id);
             return View(Inverter);
         }
-         
+        
         public ActionResult Delete(int id)
         {
-            _productContext.Delete(id);
+            InverterLogic.Delete(id);
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            return View(InverterLogic.GetById(id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Inverter inverter)
+        {
+            InverterLogic.Update(inverter.Id, inverter);
+            return View("Overview",InverterLogic.GetAll());
+        }
+
     }
 }

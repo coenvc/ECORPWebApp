@@ -36,6 +36,7 @@ namespace EcoRP.Logic
         public List<Customer> GetAll()
         {
             return Context.GetAll();
-        }
+        }  
+
     }
 }

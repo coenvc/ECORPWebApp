@@ -43,6 +43,6 @@ namespace EcoRP.Models
         public Customer()
         {
             
-        }
+        } 
     }
 }

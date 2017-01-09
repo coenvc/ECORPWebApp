@@ -44,10 +44,14 @@ namespace EcoRP.Models
             Address = address;
         }
 
-        public Person()
+        protected Person()
         {
             
         }
 
+        public override string ToString()
+        {
+            return $"{Name} {Surname}";
+        }
     }
 }

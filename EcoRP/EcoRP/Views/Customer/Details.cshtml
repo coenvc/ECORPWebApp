@@ -1,51 +1,100 @@
-﻿@model EcoRP.Models.Customer
+﻿@using EcoRP.Models
+@model EcoRP.Models.CustomerProfileViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 toppad">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@Model.Customer.Name @Model.Customer.Surname</h3>
+                </div>
+                <div class="container">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class=" col-md-12 col-lg-9 ">
+                                <table class="table borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td>Test:</td>
+                                            <td>Test</td>
+                                        </tr>
+                                        <tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td><a href="mailto:@Model.Customer.Email">@Model.Customer.Email</a></td>
+                                        </tr>
+                                    <td>Phone Number</td>
+                                    <td>
+                                        @Model.Customer.Telefoonnummer
+                                    </td>
 
-<div>
-    <h4>Customer</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                                    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                                    </tbody>
+                                </table>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Surname)
-        </dt>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
 
-        <dd>
-            @Html.DisplayFor(model => model.Surname)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+                                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+                                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+                                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+                                </ul>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="home">
+                                        <table>
+                                            <tr>
+                                                <td>Hire date:</td>
+                                                <td>06/23/2013</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Salary</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Home Address</td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="profile">...</div>
+                                    <div role="tabpanel" class="tab-pane" id="messages">
+                                        <ul>@foreach (Appointment appointment in Model.Appointments)
+                                        {
+                                            <li>@Html.ActionLink(appointment.ToString(),"Details","Appointment",new {id = appointment.Id},null)</li>
+                                        }</ul>  
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="settings">...</div>
+                                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Telefoonnummer)
-        </dt>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                    <span class="pull-right">
+                        <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                    </span>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Telefoonnummer)
-        </dd>
-
-    </dl>
+            </div>
+        </div>
+    </div>
 </div>
 <p>
-    @Html.ActionLink("Nieuwe Afspraak", "Create", "Appointment",new { id = Model.Id},null)
-    @Html.ActionLink("Nieuwe Order", "CreateOrder", new {id = Model.Id}) |
-    @Html.ActionLink("Edit", "Edit", new {id = Model.Id}) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Terug naar overzicht", "Index") |
+    @Html.ActionLink("Nieuwe Afspraak","Create","Appointment",new {Id = Model.Customer.Id},null)
 </p>

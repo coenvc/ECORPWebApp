@@ -14,6 +14,8 @@ namespace EcoRP.IRepository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        List<Appointment> GetByEmployeeId(int id); 
+        List<Appointment> GetByEmployeeId(int id);
+
+        List<Appointment> GetByCustomerId(int id);
     }
 }

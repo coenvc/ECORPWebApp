@@ -66,5 +66,24 @@ namespace EcoRP.Logic
         {
             return Context.GetByEmployeeId(id);
         }
+
+        public List<Appointment> GetByCustomerId(int id)
+        {
+            return Context.GetByCustomerId(id);
+        }
+        /// <summary>
+        /// Gets a list of appointments that are planned after the current datetime
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<Appointment> GetPlannedAppointmentsByEmployee(int id)
+        {
+            List<Appointment> futureAppointments = this.GetByCustomerId(id).Where(x => x.Date > DateTime.Now).ToList();
+
+            return futureAppointments;
+        } 
+
+
+
     }
 }
